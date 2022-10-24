@@ -28,3 +28,19 @@ SELECT *
 |-------|----------------|------------|----------------|---------------------|-----------|
 | 14887 | Morty Schapiro | 118009     | 4919           | Northwestern Dr     | 111564949 |
 | 16371 | Annabel Miller | 490173     | 103            | Franklin Ave        | 318771143 |
+
+# Разузнаем информацию про <b>Morty Schapiro</b>
+Запрос:
+```sql
+SELECT name, age, height, eye_color, hair_color, gender,
+       plate_number, car_make, car_model,
+       annual_income
+  FROM person p
+       LEFT JOIN drivers_license dl ON p.license_id = dl.id
+       LEFT JOIN income i ON i.ssn = p.ssn
+ WHERE p.id = 14887
+```
+Вывод:
+| name           | age | height | eye_color | hair_color | gender | plate_number | car_make      | car_model | annual_income |
+|----------------|-----|--------|-----------|------------|--------|--------------|---------------|-----------|---------------|
+| Morty Schapiro | 64  | 84     | blue      | white      | male   | 00NU00       | Mercedes-Benz | E-Class   | null          |

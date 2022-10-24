@@ -31,24 +31,6 @@ SELECT *
 | 14887 | Morty Schapiro | 118009     | 4919           | Northwestern Dr     | 111564949 |
 | 16371 | Annabel Miller | 490173     | 103            | Franklin Ave        | 318771143 |
 
-## Разузнаем информацию про <b>Morty Schapiro</b> и <b>Annabel Miller</b>
-Запрос:
-```sql
-SELECT name, age, height, eye_color, hair_color, gender,
-       plate_number, car_make, car_model,
-       annual_income
-  FROM person p
-       LEFT JOIN drivers_license dl ON p.license_id = dl.id
-       LEFT JOIN income i ON i.ssn = p.ssn
- WHERE p.id = 14887
-       OR p.id = 16371
-```
-Вывод:
-| name           | age | height | eye_color | hair_color | gender | plate_number | car_make      | car_model | annual_income |
-|----------------|-----|--------|-----------|------------|--------|--------------|---------------|-----------|---------------|
-| Morty Schapiro | 64  | 84     | blue      | white      | male   | 00NU00       | Mercedes-Benz | E-Class   | null          |
-| Annabel Miller | 35  | 65     | green     | brown      | female | 23AM98       | Toyota        | Yaris     | null          |
-
 ## Достанем интервью с обоими свидетелями
 Запрос:
 ```sql
@@ -106,3 +88,47 @@ FROM solution;
 |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Congrats,  you found the murderer! But wait, there's more... If you think you're  up for a challenge, try querying the interview transcript of the  murderer to find the real villain behind this crime. If you feel  especially confident in your SQL skills, try to complete this final step  with no more than 2 queries. Use this same INSERT statement with your  new suspect to check your answer. |
 
+# 2 Этап
+
+## Достанем интервью с <b>Jeremy Bowers</b>
+Запрос:
+```sql
+SELECT *
+  FROM interview
+ WHERE person_id = 67318
+```
+Вывод:
+| person_id | transcript                                                                                                                                                                                                                                            |
+|-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 67318     | I  was hired by a woman with a lot of money. I don't know her name but I  know she's around 5'5" (65") or 5'7" (67"). She has red hair and she  drives a Tesla Model S. I know that she attended the SQL Symphony  Concert 3 times in December 2017.  |
+
+## Найдём нанимательницу
+Запрос:
+```sql
+SELECT DISTINCT name
+  FROM drivers_license dl
+       JOIN person p ON p.license_id = dl.id
+       JOIN income USING(ssn)
+       JOIN facebook_event_checkin f ON f.person_id = p.id
+ WHERE height BETWEEN 65 AND 67
+       AND hair_color = 'red'
+       AND car_model = 'Model S'
+       AND car_make = 'Tesla'
+```
+Вывод:
+| name             |
+|------------------|
+| Miranda Priestly |
+
+## Результат 2-го этапа
+Запрос:
+```sql
+INSERT INTO solution 
+     VALUES (1, 'Miranda Priestly');
+SELECT value 
+FROM solution;
+```
+Вывод:
+| value                                                                                                                                                           |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Congrats,  you found the brains behind the murder! Everyone in SQL City hails you  as the greatest SQL detective of all time. Time to break out the  champagne! |

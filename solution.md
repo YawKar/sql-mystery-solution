@@ -20,8 +20,8 @@ SELECT *
  WHERE name LIKE 'Annabel %'
        OR (address_street_name = 'Northwestern Dr'
            AND address_number = (SELECT MAX(address_number)
-								   FROM person
-								  WHERE address_street_name = 'Northwestern Dr'))
+                                   FROM person
+                                  WHERE address_street_name = 'Northwestern Dr'))
 ```
 Вывод:
 | id    | name           | license_id | address_number | address_street_name | ssn       |

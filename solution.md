@@ -12,7 +12,7 @@ SELECT *
 |----------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
 | 20180115 | murder | Security  footage shows that there were 2 witnesses. The first witness lives at  the last house on "Northwestern Dr". The second witness, named Annabel,  lives somewhere on "Franklin Ave". | SQL City |
 
-# Найдём обоих подозреваемых в таблице `person`
+# Найдём обоих свидетелей в таблице `person`
 Запрос:
 ```sql
 SELECT *
@@ -47,7 +47,7 @@ SELECT name, age, height, eye_color, hair_color, gender,
 | Morty Schapiro | 64  | 84     | blue      | white      | male   | 00NU00       | Mercedes-Benz | E-Class   | null          |
 | Annabel Miller | 35  | 65     | green     | brown      | female | 23AM98       | Toyota        | Yaris     | null          |
 
-# Достанем интервью с обоими подозреваемыми
+# Достанем интервью с обоими свидетелями
 Запрос:
 ```sql
 SELECT name, transcript
